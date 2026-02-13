@@ -1,187 +1,324 @@
-<!doctype html>    
-<html lang="en"> 
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>For Akanksha 💖</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For Akanksha 💖</title>
 
-<style>
-body{
-  margin:0;
-  height:100vh;
-  overflow:hidden;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto;
-  background:linear-gradient(135deg,#fff1f7,#ffe6f0);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+  <style>
+    :root{
+      --pink1:#ff3b7a;
+      --pink2:#ff5f93;
+      --black:#111;
+      --bg1:#fff1f7;
+      --bg2:#ffe6f0;
+      --card:#ffffffcc;
+      --muted:#6b6b6b;
+      --shadow:0 20px 60px rgba(0,0,0,.12);
+    }
 
-h1{
-  position:absolute;
-  top:40px;
-  width:100%;
-  text-align:center;
-  font-size:32px;
-}
+    *{ box-sizing:border-box; }
 
-#question{
-  position:absolute;
-  top:100px;
-  width:100%;
-  text-align:center;
-  font-size:20px;
-  font-weight:700;
-}
+    body{
+      margin:0;
+      height:100vh;
+      overflow:hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto;
+      background:
+        radial-gradient(900px 500px at 10% 10%, var(--bg2), transparent 60%),
+        linear-gradient(180deg, var(--bg1), #ffffff);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
 
-button{
-  position:absolute;
-  padding:14px 22px;
-  border-radius:18px;
-  border:0;
-  font-size:16px;
-  cursor:pointer;
-  transition:all .25s ease;
-}
+    .card{
+      width:min(680px, 94vw);
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.65);
+      backdrop-filter: blur(10px);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:34px 26px 28px;
+      text-align:center;
+      position:relative;
+    }
 
-#yes{
-  background:linear-gradient(135deg,#ff3b7a,#ff5f93);
-  color:white;
-  font-weight:800;
-}
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      letter-spacing:-.02em;
+      color:#1f1f1f;
+    }
 
-#no{
-  background:white;
-  border:1px solid rgba(0,0,0,.15);
-  font-weight:650;
-}
+    #question{
+      margin:0 auto;
+      max-width:42ch;
+      font-size:20px;
+      font-weight:750;
+      line-height:1.25;
+      color:#2a2a2a;
+      min-height:3.1em; /* keeps question area stable & always visible */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-#fullYes{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#ff3b7a,#ff5f93);
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
+    .hint{
+      margin:12px 0 0;
+      font-size:13px;
+      color:var(--muted);
+    }
 
-#fullYes button{
-  width:100%;
-  height:100%;
-  border-radius:0;
-  font-size:8vw;
-  font-weight:900;
-  background:transparent;
-  color:white;
-}
-</style>
+    /* Button zone is a dedicated area BELOW the question so it never overlaps */
+    .playZone{
+      position:relative;
+      margin-top:22px;
+      height:220px; /* dedicated button area */
+      border-radius:18px;
+    }
+
+    button{
+      position:absolute;
+      padding:14px 22px;
+      border-radius:18px;
+      border:0;
+      font-size:16px;
+      cursor:pointer;
+      user-select:none;
+      transition:
+        transform .18s ease,
+        left .25s ease,
+        top .25s ease,
+        font-size .18s ease;
+      white-space:nowrap;
+    }
+
+    #yes{
+      background:linear-gradient(135deg,var(--pink1),var(--pink2));
+      color:#fff;
+      font-weight:850;
+      box-shadow:0 14px 30px rgba(255,59,122,.25);
+    }
+
+    #no{
+      background:var(--black);
+      color:#fff;
+      font-weight:750;
+      box-shadow:0 12px 26px rgba(0,0,0,.18);
+    }
+
+    /* Fullscreen YES mode — only at the very end */
+    .fullYes{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:linear-gradient(135deg,var(--pink1),var(--pink2));
+      z-index:999;
+      align-items:center;
+      justify-content:center;
+    }
+    .fullYes button{
+      width:100%;
+      height:100%;
+      border-radius:0;
+      background:transparent;
+      color:white;
+      font-weight:950;
+      font-size:min(9vw, 72px);
+    }
+  </style>
 </head>
 
 <body>
+  <div class="card">
+    <h1>Akanksha CUTUUU 💘</h1>
 
-<h1>Akanksha 💘</h1>
-<div id="question">
-Will you be my Valentine and go on a date with me? 💖
-</div>
+    <div id="question">
+      Will you be my Valentine and go on a date with me? 💖
+    </div>
+    <div class="hint" id="hint">Pick one 🙂</div>
 
-<button id="yes">Yes!! 🥰</button>
-<button id="no">No 😤</button>
+    <!-- Buttons are confined to this zone so they never cover the question -->
+    <div class="playZone" id="zone">
+      <button id="yes">Yes!! 🥰</button>
+      <button id="no">No 😤</button>
+    </div>
+  </div>
 
-<div id="fullYes">
-  <button onclick="openWhatsApp()">YES 💖</button>
-</div>
+  <div class="fullYes" id="fullYes">
+    <button id="fullYesBtn">YES 💖</button>
+  </div>
 
-<script>
-const WHATSAPP_NUMBER = "447846449335";
-const YOUR_NAME = "Anshul";
+  <script>
+    // ✅ Your details
+    const WHATSAPP_NUMBER = "447846449335";
+    const YOUR_NAME = "Anshul";
 
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-const question = document.getElementById("question");
-const fullYes = document.getElementById("fullYes");
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const question = document.getElementById("question");
+    const hint = document.getElementById("hint");
+    const zone = document.getElementById("zone");
+    const fullYes = document.getElementById("fullYes");
+    const fullYesBtn = document.getElementById("fullYesBtn");
 
-let noCount = 0;
-let yesScale = 1;
-let noScale = 1;
+    // "No" progression text
+    const NO_TEXTS = [
+      "Are you sure? 😳",
+      "Pretty pleasess? 🥺",
+      "Please please pleaseeee? 🙏",
+      "Akanksha… come onn noww 😭",
+      "I made a whole website TUMHARE LIYEEEE 😔",
+      "Okay… last last AAKHRIII chance 💘",
+      "You’re really making me work for this right ?? 😌",
+      "Alright. I’m not stoppingggggg."
+    ];
 
-const messages = [
-"Are you sure about that? 😳",
-"Pretty pleaseeee? 🥺",
-"Please pleaseee pleaseeee? 🙏",
-"Akanksha... come onnnn 😭",
-"I made a whole website TUMHARE LIYEEE 😔",
-"Last chance DE DOOOOO... 💘",
-"Just press YESSSS 😌"
-];
+    let noCount = 0;
 
-function openWhatsApp(){
-  const msg = `YES!! 💖 I’ll be your Valentine, ${YOUR_NAME} 😌`;
-  const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-  window.open(link,"_blank");
-}
+    // Gentle scaling — always visible
+    // YES grows modestly; NO shrinks modestly but never disappears
+    let yesScale = 1.00;
+    let noScale  = 1.00;
 
-yes.onclick = openWhatsApp;
+    // Small movement only (within a tight range) inside the zone
+    // Keeps things readable and away from the question (zone is below).
+    const MARGIN = 14;
+    const JITTER = 26; // small movement amount
 
-no.onclick = () => {
-  noCount++;
+    // We'll keep target "anchor" positions and nudge around them
+    let yesPos = { x: 0, y: 0 };
+    let noPos  = { x: 0, y: 0 };
 
-  // Update question text
-  question.textContent = messages[Math.min(noCount-1, messages.length-1)];
+    function openWhatsAppYes(){
+      const msg = `YES!! 💖 I’ll be your Valentine, ${YOUR_NAME} 😌`;
+      const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(link, "_blank", "noopener,noreferrer");
+    }
 
-  // Resize
-  yesScale += 0.25;
-  noScale = Math.max(0.1, noScale - 0.15);
+    yesBtn.addEventListener("click", openWhatsAppYes);
+    fullYesBtn.addEventListener("click", openWhatsAppYes);
 
-  yes.style.transform = `scale(${yesScale})`;
-  no.style.transform = `scale(${noScale})`;
+    function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
 
-  yes.style.fontSize = `${16 + noCount*2}px`;
-  no.style.fontSize = `${Math.max(10, 16 - noCount*1.5)}px`;
+    function zoneSize(){
+      const rect = zone.getBoundingClientRect();
+      return { w: rect.width, h: rect.height };
+    }
 
-  moveButtons();
+    function getBtnSize(btn){
+      // Use offsetWidth/offsetHeight which reflect current scaling visually fairly well.
+      return { w: btn.offsetWidth, h: btn.offsetHeight };
+    }
 
-  if(noCount >= 7){
-    fullYes.style.display = "flex";
-  }
-};
+    function placeInitial(){
+      const { w, h } = zoneSize();
+      const yesS = getBtnSize(yesBtn);
+      const noS  = getBtnSize(noBtn);
 
-function moveButtons(){
-  const padding = 100;
+      // Put them side-by-side, centered, with spacing
+      const gap = 18;
+      const totalW = yesS.w + gap + noS.w;
 
-  const yesWidth = yes.offsetWidth;
-  const yesHeight = yes.offsetHeight;
+      yesPos.x = clamp((w - totalW)/2, MARGIN, w - yesS.w - MARGIN);
+      yesPos.y = clamp(h*0.50 - yesS.h/2, MARGIN, h - yesS.h - MARGIN);
 
-  const noWidth = no.offsetWidth;
-  const noHeight = no.offsetHeight;
+      noPos.x  = clamp(yesPos.x + yesS.w + gap, MARGIN, w - noS.w - MARGIN);
+      noPos.y  = clamp(h*0.50 - noS.h/2, MARGIN, h - noS.h - MARGIN);
 
-  const maxX = window.innerWidth - padding;
-  const maxY = window.innerHeight - padding;
+      yesBtn.style.left = yesPos.x + "px";
+      yesBtn.style.top  = yesPos.y + "px";
+      noBtn.style.left  = noPos.x + "px";
+      noBtn.style.top   = noPos.y + "px";
+    }
 
-  let yesX = Math.random() * (maxX - yesWidth);
-  let yesY = Math.random() * (maxY - yesHeight);
+    function gentlyMoveButtons(){
+      const { w, h } = zoneSize();
+      const yesS = getBtnSize(yesBtn);
+      const noS  = getBtnSize(noBtn);
 
-  let noX = Math.random() * (maxX - noWidth);
-  let noY = Math.random() * (maxY - noHeight);
+      // Nudge within a small jitter range
+      const dxYes = (Math.random()*2 - 1) * JITTER;
+      const dyYes = (Math.random()*2 - 1) * (JITTER * 0.6);
 
-  // Ensure they don't overlap
-  const minDistance = 150;
-  while(Math.abs(yesX - noX) < minDistance && Math.abs(yesY - noY) < minDistance){
-    noX = Math.random() * (maxX - noWidth);
-    noY = Math.random() * (maxY - noHeight);
-  }
+      const dxNo  = (Math.random()*2 - 1) * JITTER;
+      const dyNo  = (Math.random()*2 - 1) * (JITTER * 0.6);
 
-  yes.style.left = yesX + "px";
-  yes.style.top = yesY + "px";
+      let newYesX = clamp(yesPos.x + dxYes, MARGIN, w - yesS.w - MARGIN);
+      let newYesY = clamp(yesPos.y + dyYes, MARGIN, h - yesS.h - MARGIN);
 
-  no.style.left = noX + "px";
-  no.style.top = noY + "px";
-}
+      let newNoX  = clamp(noPos.x + dxNo,  MARGIN, w - noS.w - MARGIN);
+      let newNoY  = clamp(noPos.y + dyNo,  MARGIN, h - noS.h - MARGIN);
 
-// Initial placement
-moveButtons();
+      // Prevent overlap with a simple separation check
+      const pad = 14;
+      const overlap =
+        !(newYesX + yesS.w + pad < newNoX ||
+          newNoX + noS.w + pad < newYesX ||
+          newYesY + yesS.h + pad < newNoY ||
+          newNoY + noS.h + pad < newYesY);
 
-</script>
+      if (overlap){
+        // If overlap happens, push NO slightly to the right/down within bounds
+        newNoX = clamp(newNoX + 40, MARGIN, w - noS.w - MARGIN);
+        newNoY = clamp(newNoY + 18, MARGIN, h - noS.h - MARGIN);
+      }
 
+      yesPos = { x: newYesX, y: newYesY };
+      noPos  = { x: newNoX, y: newNoY };
+
+      yesBtn.style.left = yesPos.x + "px";
+      yesBtn.style.top  = yesPos.y + "px";
+      noBtn.style.left  = noPos.x + "px";
+      noBtn.style.top   = noPos.y + "px";
+    }
+
+    function applyScaling(){
+      yesBtn.style.transform = `scale(${yesScale})`;
+      noBtn.style.transform  = `scale(${noScale})`;
+    }
+
+    noBtn.addEventListener("click", () => {
+      noCount++;
+
+      // Update question
+      question.textContent = NO_TEXTS[Math.min(noCount - 1, NO_TEXTS.length - 1)];
+
+      // Gentle scaling, always visible
+      yesScale = clamp(yesScale + 0.10, 1.0, 2.2);
+      noScale  = clamp(noScale  - 0.06, 0.70, 1.0);
+
+      // Slight font nudge (still readable)
+      yesBtn.style.fontSize = `${clamp(16 + noCount * 1.0, 16, 24)}px`;
+      noBtn.style.fontSize  = `${clamp(16 - noCount * 0.3, 13, 16)}px`;
+
+      applyScaling();
+      gentlyMoveButtons();
+
+      // Keep both visible till the very end; only then full-page YES
+      if (noCount >= 10) {
+        fullYes.style.display = "flex";
+      }
+
+      // Friendly hint changes
+      if (noCount === 1) hint.textContent = "Just checking 😌";
+      if (noCount === 3) hint.textContent = "Okay you’re stubborn 😭";
+      if (noCount === 6) hint.textContent = "The YES is right there 💖";
+      if (noCount === 9) hint.textContent = "Alright… I’m escalating.";
+    });
+
+    // Re-place on load + resize so it never breaks on different screens
+    window.addEventListener("load", () => {
+      // Apply initial transforms first
+      applyScaling();
+      placeInitial();
+    });
+
+    window.addEventListener("resize", () => {
+      placeInitial();
+    });
+  </script>
 </body>
 </html>
