@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>For Akanksha 💖</title>
+
+<style>
+:root{
+  --bg1:#fff1f7;
+  --bg2:#ffe6f0;
+  --text:#1f1f1f;
+  --muted:#6b6b6b;
+  --card:#ffffffcc;
+  --yes:#ff3b7a;
+  --yes2:#ff5f93;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto;
+  background: linear-gradient(180deg, var(--bg1), #ffffff);
+  overflow:hidden;
+}
+
+.card{
+  width:min(560px, 92vw);
+  background:var(--card);
+  border-radius:28px;
+  padding:30px 24px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.12);
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+p{
+  color:var(--muted);
+  font-size:16px;
+}
+
+.actions{
+  margin-top:25px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
+
+button{
+  border:0;
+  border-radius:16px;
+  padding:14px 22px;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.yes{
+  background:linear-gradient(135deg,var(--yes),var(--yes2));
+  color:white;
+  font-weight:bold;
+}
+
+.no{
+  background:white;
+  border:1px solid #ddd;
+}
+
+.yes:hover{ transform:scale(1.05); }
+.no:hover{ transform:scale(1.05); }
+
+.result{
+  display:none;
+  margin-top:20px;
+  font-weight:bold;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Akanksha 💘</h1>
+  <p>Hi Hi Cutie PIEEEEEEE.</p>
+  <p><strong>Will you be my Valentine and go on a date with me? 💖</strong></p>
+
+  <div class="actions">
+    <button class="yes" onclick="sayYes()">Yes!! 🥰</button>
+    <button class="no" onmouseover="moveNo(this)">No 😤</button>
+  </div>
+
+  <div class="result" id="resultBox">
+    YAYYYY. It’s a date. ❤️  
+  </div>
+</div>
+
+<script>
+function sayYes() {
+  document.getElementById("resultBox").style.display = "block";
+
+  const message = "YES!! 💖 I’ll be your Valentine, Anshul 😌";
+  const encoded = encodeURIComponent(message);
+  const link = "https://wa.me/447846449335?text=" + encoded;
+
+  setTimeout(() => {
+    window.open(link, "_blank");
+  }, 500);
+}
+
+function moveNo(button) {
+  button.style.position = "absolute";
+  button.style.left = Math.random() * 80 + "%";
+  button.style.top = Math.random() * 80 + "%";
+}
+</script>
+
+</body>
+</html>
