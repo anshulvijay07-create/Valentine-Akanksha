@@ -1,210 +1,187 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>For Akanksha 💖</title>
-  <style>
-    :root{
-      --bg1:#fff1f7;
-      --bg2:#ffe6f0;
-      --text:#1f1f1f;
-      --muted:#6b6b6b;
-      --card:#ffffffcc;
-      --shadow: 0 20px 60px rgba(0,0,0,.12);
-      --yes:#ff3b7a;
-      --yes2:#ff5f93;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto;
-      background: radial-gradient(900px 500px at 10% 10%, var(--bg2), transparent 60%),
-                  linear-gradient(180deg, var(--bg1), #ffffff);
-      overflow:hidden;
-    }
-    .card{
-      width:min(620px, 92vw);
-      background:var(--card);
-      border-radius:28px;
-      padding:32px 26px;
-      text-align:center;
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
-      border:1px solid rgba(255,255,255,.6);
-    }
-    h1{
-      margin:0 0 10px;
-      font-size:34px;
-      letter-spacing:-.02em;
-    }
-    p{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.4;
-    }
-    .question{
-      font-size:20px;
-      margin:10px 0 0;
-      color:#2a2a2a;
-      font-weight:700;
-    }
-    .actions{
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:22px;
-    }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>For Akanksha 💖</title>
 
-    button{
-      border:0;
-      border-radius:18px;
-      padding:14px 22px;
-      font-size:16px;
-      cursor:pointer;
-      transition: transform .12s ease, width .2s ease, height .2s ease, font-size .2s ease;
-      user-select:none;
-    }
-    button:active{ transform: translateY(1px); }
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:linear-gradient(135deg,#fff1f7,#ffe6f0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .yes{
-      background:linear-gradient(135deg,var(--yes),var(--yes2));
-      color:white;
-      font-weight:800;
-      box-shadow:0 14px 30px rgba(255,59,122,.25);
-    }
-    .no{
-      background:white;
-      border:1px solid rgba(0,0,0,.12);
-      color:#111;
-      font-weight:650;
-    }
+h1{
+  position:absolute;
+  top:40px;
+  width:100%;
+  text-align:center;
+  font-size:32px;
+}
 
-    .tiny{
-      margin-top:14px;
-      font-size:12px;
-      color:var(--muted);
-    }
+#question{
+  position:absolute;
+  top:100px;
+  width:100%;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+}
 
-    /* Fullscreen YES mode */
-    .full-yes{
-      position:fixed;
-      inset:0;
-      display:none;
-      background:linear-gradient(135deg,var(--yes),var(--yes2));
-      align-items:center;
-      justify-content:center;
-      z-index:999;
-    }
-    .full-yes button{
-      width:100%;
-      height:100%;
-      border-radius:0;
-      font-size:min(9vw, 64px);
-      font-weight:900;
-      background:transparent;
-      color:white;
-      cursor:pointer;
-    }
-  </style>
+button{
+  position:absolute;
+  padding:14px 22px;
+  border-radius:18px;
+  border:0;
+  font-size:16px;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+
+#yes{
+  background:linear-gradient(135deg,#ff3b7a,#ff5f93);
+  color:white;
+  font-weight:800;
+}
+
+#no{
+  background:white;
+  border:1px solid rgba(0,0,0,.15);
+  font-weight:650;
+}
+
+#fullYes{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#ff3b7a,#ff5f93);
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+#fullYes button{
+  width:100%;
+  height:100%;
+  border-radius:0;
+  font-size:8vw;
+  font-weight:900;
+  background:transparent;
+  color:white;
+}
+</style>
 </head>
 
 <body>
-  <div class="card" id="card">
-    <h1>Akanksha 💘</h1>
-    <p> Hi Hi CUTIEEEE PIEEEEEE.</p>
-    <div class="question" id="questionLine">
-      Will you be my Valentine and go on a date with me? 💖
-    </div>
 
-    <div class="actions">
-      <button class="yes" id="yesBtn">Yes!! 🥰</button>
-      <button class="no" id="noBtn">No 😤</button>
-    </div>
+<h1>Akanksha 💘</h1>
+<div id="question">
+Will you be my Valentine and go on a date with me? 💖
+</div>
 
-    <div class="tiny" id="hint">Be honest… but choose wisely 😌</div>
-  </div>
+<button id="yes">Yes!! 🥰</button>
+<button id="no">No 😤</button>
 
-  <div class="full-yes" id="fullYes">
-    <button id="fullYesBtn">YES 💖</button>
-  </div>
+<div id="fullYes">
+  <button onclick="openWhatsApp()">YES 💖</button>
+</div>
 
 <script>
-  // ✅ Your details (already filled)
-  const HER_NAME = "Akanksha";
-  const YOUR_NAME = "Anshul";
-  const WHATSAPP_NUMBER = "447846449335";
+const WHATSAPP_NUMBER = "447846449335";
+const YOUR_NAME = "Anshul";
 
-  // What the "No" button cycles through
-  const NO_STAGES = [
-    "Are you sure? 😳",
-    "Pretty please? 🥺",
-    "Please please pleaseeeeee? 🙏",
-    "Akanksha... come onnnn 😭",
-    "I made a whole website for youuuuuuu 😔",
-    "Last maukaaaaaa... 💘",
-    "Okay but like… IT'S A YESSSSSS? 😌"
-  ];
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const question = document.getElementById("question");
+const fullYes = document.getElementById("fullYes");
 
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-  const questionLine = document.getElementById("questionLine");
-  const hint = document.getElementById("hint");
+let noCount = 0;
+let yesScale = 1;
+let noScale = 1;
 
-  const fullYes = document.getElementById("fullYes");
-  const fullYesBtn = document.getElementById("fullYesBtn");
+const messages = [
+"Are you sure about that? 😳",
+"Pretty pleaseeee? 🥺",
+"Please pleaseee pleaseeee? 🙏",
+"Akanksha... come onnnn 😭",
+"I made a whole website TUMHARE LIYEEE 😔",
+"Last chance DE DOOOOO... 💘",
+"Just press YESSSS 😌"
+];
 
-  let noCount = 0;
+function openWhatsApp(){
+  const msg = `YES!! 💖 I’ll be your Valentine, ${YOUR_NAME} 😌`;
+  const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(link,"_blank");
+}
 
-  // Start sizes
-  let yesScale = 1;
-  let noScale = 1;
+yes.onclick = openWhatsApp;
 
-  function openWhatsAppYes(){
-    const msg = `YES!! 💖 I’ll be your Valentine, ${YOUR_NAME} 😌`;
-    const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(link, "_blank", "noopener,noreferrer");
+no.onclick = () => {
+  noCount++;
+
+  // Update question text
+  question.textContent = messages[Math.min(noCount-1, messages.length-1)];
+
+  // Resize
+  yesScale += 0.25;
+  noScale = Math.max(0.1, noScale - 0.15);
+
+  yes.style.transform = `scale(${yesScale})`;
+  no.style.transform = `scale(${noScale})`;
+
+  yes.style.fontSize = `${16 + noCount*2}px`;
+  no.style.fontSize = `${Math.max(10, 16 - noCount*1.5)}px`;
+
+  moveButtons();
+
+  if(noCount >= 7){
+    fullYes.style.display = "flex";
+  }
+};
+
+function moveButtons(){
+  const padding = 100;
+
+  const yesWidth = yes.offsetWidth;
+  const yesHeight = yes.offsetHeight;
+
+  const noWidth = no.offsetWidth;
+  const noHeight = no.offsetHeight;
+
+  const maxX = window.innerWidth - padding;
+  const maxY = window.innerHeight - padding;
+
+  let yesX = Math.random() * (maxX - yesWidth);
+  let yesY = Math.random() * (maxY - yesHeight);
+
+  let noX = Math.random() * (maxX - noWidth);
+  let noY = Math.random() * (maxY - noHeight);
+
+  // Ensure they don't overlap
+  const minDistance = 150;
+  while(Math.abs(yesX - noX) < minDistance && Math.abs(yesY - noY) < minDistance){
+    noX = Math.random() * (maxX - noWidth);
+    noY = Math.random() * (maxY - noHeight);
   }
 
-  yesBtn.addEventListener("click", openWhatsAppYes);
-  fullYesBtn.addEventListener("click", openWhatsAppYes);
+  yes.style.left = yesX + "px";
+  yes.style.top = yesY + "px";
 
-  noBtn.addEventListener("click", () => {
-    noCount++;
+  no.style.left = noX + "px";
+  no.style.top = noY + "px";
+}
 
-    // Update prompt text
-    const stageText = NO_STAGES[Math.min(noCount - 1, NO_STAGES.length - 1)];
-    questionLine.textContent = stageText;
+// Initial placement
+moveButtons();
 
-    // Grow YES, shrink NO
-    yesScale = Math.min(yesScale + 0.22, 6);   // cap so it doesn't get ridiculous too early
-    noScale  = Math.max(noScale  - 0.16, 0.08); // don't go negative
-
-    yesBtn.style.transform = `scale(${yesScale})`;
-    noBtn.style.transform  = `scale(${noScale})`;
-
-    // Make YES text a bit bigger as it grows (optional)
-    yesBtn.style.fontSize = `${Math.min(16 + noCount * 2, 34)}px`;
-    noBtn.style.fontSize  = `${Math.max(16 - noCount * 1.2, 10)}px`;
-
-    // Little hint line changes
-    if (noCount === 1) hint.textContent = "I’m just checking… 😌";
-    if (noCount === 2) hint.textContent = "Okay now you're bullying me 🥲";
-    if (noCount === 3) hint.textContent = "This is getting personal 😭";
-    if (noCount === 4) hint.textContent = "I will keep asking forever.";
-    if (noCount === 5) hint.textContent = "The YES is right there. 💖";
-
-    // Final: turn whole page into YES button after enough "No"s
-    if (noCount >= 7) {
-      fullYes.style.display = "flex"; 
-    }
-  });
 </script>
+
 </body>
 </html>
